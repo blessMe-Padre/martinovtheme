@@ -2514,3 +2514,12 @@ a {
   height: 40px;
   border-left: 1px solid var(--white);
 }
+
+/* тут начинаем перебивать слили woocommerce */
+
+.added_to_cart.wc-forward {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  font-size: 12px;
+}
