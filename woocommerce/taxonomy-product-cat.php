@@ -57,6 +57,12 @@ if (woocommerce_product_loop()) {
 	 * @hooked woocommerce_catalog_ordering - 30
 	 */
 	do_action('woocommerce_before_shop_loop');
+	echo '<div class="woo-page-wrapper">';
+	echo '<div class="1111">11111111111111</div>';
+	echo '<div class="2222">';
+
+
+
 
 
 

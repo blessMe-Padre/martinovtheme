@@ -20,7 +20,5 @@ if (!defined('ABSPATH')) {
 }
 ?>
 
-<div class="woo-page-wrapper">
-	<div class="1111">11111111111111</div>
-	<div class="2222">
-		<ul class="products columns-<?php echo esc_attr(wc_get_loop_prop('columns')); ?>">
+
+<ul class="products columns-<?php echo esc_attr(wc_get_loop_prop('columns')); ?>">
