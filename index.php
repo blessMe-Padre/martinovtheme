@@ -16,7 +16,7 @@ get_header();
                 и косметика</p>
               <div class="hero__decor"></div>
               <p class="hero__description-text">от известных мировых брендов</p>
-              <a href="" class="anim-button _anim-button">В КАТАЛОГ</a>
+              <a href="/shop" class="anim-button _anim-button">В КАТАЛОГ</a>
             </div>
           </div>
           <picture>
@@ -33,7 +33,7 @@ get_header();
                 и косметика</p>
               <div class="hero__decor"></div>
               <p class="hero__description-text">от известных мировых брендов</p>
-              <a href="" class="anim-button _anim-button">В КАТАЛОГ</a>
+              <a href="/shop" class="anim-button _anim-button">В КАТАЛОГ</a>
             </div>
           </div>
           <picture>
@@ -50,7 +50,7 @@ get_header();
                 и косметика</p>
               <div class="hero__decor"></div>
               <p class="hero__description-text">от известных мировых брендов</p>
-              <a href="" class="anim-button _anim-button">В КАТАЛОГ</a>
+              <a href="/shop" class="anim-button _anim-button">В КАТАЛОГ</a>
             </div>
           </div>
           <picture>
