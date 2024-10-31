@@ -2535,10 +2535,77 @@ a {
   float: none;
 }
 
+.brands-header-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 30px;
+}
+
+.brands-header-item-img {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+
+.brands-header-item-img.blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.brands-header-item-blur {
+  position: relative;
+  padding: 40px;
+}
+
+.brands-header-item-blur::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(80px);
+  background: rgba(255, 255, 255, 0.05);
+  transform: rotate(-180deg);
+}
+
+.brand-description {
+  position: relative;
+  z-index: 2;
+
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #292e35;
+}
+
+.brand-description-title {
+  position: relative;
+  z-index: 2;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 60px;
+  text-transform: uppercase;
+  color: #292e35;
+}
+
+.border-left-block-brand {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+  border-left: 1px solid var(--black);
+}
+
 .brands-list {
   display: flex;
   align-items: center;
   gap: 30px;
+  margin-bottom: 30px;
 }
 
 .brands-list li a {
@@ -2554,4 +2621,58 @@ a {
   background-color: #f3f3f8;
 
   transition: background-color 0.3s ease;
+}
+
+.brands-list li.current-menu-item a {
+  background: #9799a0;
+  color: #ffffff;
+}
+
+.category-new-main-title {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.875rem, 1.227rem + 2.804vw, 3.75rem);
+  text-transform: uppercase;
+  color: #282a2d;
+  margin-bottom: 30px;
+}
+
+.woocommerce-result-count,
+.woocommerce-ordering {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .brand-description {
+    font-size: 14px;
+  }
+
+  .brand-description-title {
+    font-size: 30px;
+  }
+
+  .brands-header-item-blur {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .brand-description {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 620px) {
+
+  .brands-header-section {
+    grid-template-columns: 1fr;
+  }
+
+  .brands-header-item-blur {
+    grid-row: 2/3;
+  }
+
+  .brands-header-item-mobile {
+    max-height: 200px;
+  }
 }

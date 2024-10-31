@@ -21,11 +21,7 @@ if (!defined('ABSPATH')) {
 
 
 get_header('shop');
-
-
 echo '<div class="container"';
-
-
 /**
  * Hook: woocommerce_before_main_content.
  *
@@ -42,7 +38,17 @@ do_action('woocommerce_before_main_content');
  *
  * @hooked woocommerce_product_taxonomy_archive_header - 10
  */
-do_action('woocommerce_shop_loop_header');
+// do_action('woocommerce_shop_loop_header');
+
+$current_category = get_queried_object();
+if (is_product_category() && $current_category) {
+	$parent_id = $current_category->parent;
+	$children = get_term_children($current_category->term_id, 'product_cat');
+	if (!empty($children)) {
+		$current_title = single_cat_title('', false);
+		echo '<h1 class="category-new-main-title">' . $current_title . '</h1>';
+	}
+}
 
 if (woocommerce_product_loop()) {
 
@@ -54,43 +60,53 @@ if (woocommerce_product_loop()) {
 	 * @hooked woocommerce_catalog_ordering - 30
 	 */
 
-
 	echo '<div class="brands-header-section">';
-	$current_category = get_queried_object();
 
+	echo '<div class="brands-header-item brands-header-item-blur">';
 	if (is_product_category() && $current_category) {
 		$parent_id = $current_category->parent;
 		$has_no_children = empty(get_term_children($current_category->term_id, 'product_cat'));
 		$current_title = single_cat_title('', false);
+		$parent_category_title = get_term_by('id', $parent_id, 'product_cat');
+		$parent_category_title_name = $parent_category_title->name;
+
 
 		if ($parent_id != 0 && $has_no_children) {
 
 			$thumbnail_id = get_term_meta($current_category->term_id, 'thumbnail_id', true);
 
 			$image_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : get_template_directory_uri() . '/img/brand-placeholder.webp';
-			echo '<img class="category-image" src="' . esc_url($image_url) . '" width="300px" height="600" alt="' . esc_attr($current_category->name) . '">';
+			echo '<img class="brands-header-item-img blur" src="' . esc_url($image_url) . '" width="300px" height="600" alt="' . esc_attr($current_category->name) . '">';
+
+			if ($current_title) {
+				echo '<div class="brand-description-title">' . $current_title . '</div>';
+			}
+			echo '<div class="border-left-block border-left-block-brand"></div>';
 
 			$brand_description = get_field('brand__description', 'product_cat_' . $current_category->term_id);
 			if (!empty($brand_description)) {
 				echo '<div class="brand-description">' . $brand_description . '</div>';
 			}
+			echo '</div>';
 
-
-			echo "<p>Вы находитесь в категории: $current_title</p>";
-
+			echo '<div class="brands-header-item brands-header-item-mobile">';
+			$image_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : get_template_directory_uri() . '/img/brand-placeholder.webp';
+			echo '<img class="brands-header-item-img" src="' . esc_url($image_url) . '" width="300px" height="600" alt="' . esc_attr($current_category->name) . '">';
+			echo '</div>';
 		}
 	}
-
 	echo '</div>';
+	echo '<h1 class="category-new-main-title">' . $parent_category_title_name . '</h1>';
 
+	// меню	
 	wp_nav_menu([
 		'theme_location' => 'brands',
 		'container' => 'ul',
 		'menu_class' => 'brands-list',
 		'menu_id' => ''
 	]);
-	echo '<div class="woo-page-wrapper">';
 
+	echo '<div class="woo-page-wrapper">';
 	echo '<div class="left">';
 	$attributes = get_attributes(array(
 		'attributes_include' => array('brend', 'obvem'),
