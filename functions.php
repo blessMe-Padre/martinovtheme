@@ -3,6 +3,8 @@
 // правильный способ подключить стили и скрипты темы
 add_action('wp_enqueue_scripts', 'theme_add_scripts');
 
+// подключение и настройка меню через админку
+add_action('after_setup_theme', 'add_menu');
 
 function theme_add_scripts()
 {
@@ -23,6 +25,12 @@ function theme_add_scripts()
         '/vendor/smoothscroll.js', false, null, 'footer');
 
     wp_enqueue_script_module('main', get_theme_file_uri('/main.js'));
+}
+
+// функция для добавления меню
+function add_menu()
+{
+    register_nav_menu('brands', 'меню брендов на странице архивов');
 }
 
 

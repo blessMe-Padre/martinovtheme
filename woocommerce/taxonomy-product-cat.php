@@ -25,7 +25,10 @@ if (!defined('ABSPATH')) {
 
 
 get_header('shop');
+
+
 echo '<div class="container"';
+
 
 /**
  * Hook: woocommerce_before_main_content.
@@ -45,9 +48,7 @@ do_action('woocommerce_before_main_content');
  */
 do_action('woocommerce_shop_loop_header');
 
-
 if (woocommerce_product_loop()) {
-
 
 	/**
 	 * Hook: woocommerce_before_shop_loop.
@@ -56,15 +57,46 @@ if (woocommerce_product_loop()) {
 	 * @hooked woocommerce_result_count - 20
 	 * @hooked woocommerce_catalog_ordering - 30
 	 */
-	do_action('woocommerce_before_shop_loop');
+
+
+	echo '<div class="brands-header-section">';
+	$current_category = get_queried_object();
+
+	if (is_product_category() && $current_category) {
+		$parent_id = $current_category->parent;
+		$has_no_children = empty(get_term_children($current_category->term_id, 'product_cat'));
+		$current_title = single_cat_title('', false);
+
+		if ($parent_id != 0 && $has_no_children) {
+
+			$thumbnail_id = get_term_meta($current_category->term_id, 'thumbnail_id', true);
+
+			$image_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : get_template_directory_uri() . '/img/brand-placeholder.webp';
+			echo '<img class="category-image" src="' . esc_url($image_url) . '" width="300px" height="600" alt="' . esc_attr($current_category->name) . '">';
+
+			$brand_description = get_field('brand__description', 'product_cat_' . $current_category->term_id);
+			if (!empty($brand_description)) {
+				echo '<div class="brand-description">' . $brand_description . '</div>';
+			}
+
+
+			echo "<p>Вы находитесь в категории: $current_title</p>";
+
+		}
+	}
+
+	echo '</div>';
+
+	wp_nav_menu([
+		'theme_location' => 'brands',
+		'container' => 'ul',
+		'menu_class' => '',
+		'menu_id' => ''
+	]);
 	echo '<div class="woo-page-wrapper">';
 	echo '<div class="1111">11111111111111</div>';
 	echo '<div class="2222">';
-
-
-
-
-
+	do_action('woocommerce_before_shop_loop');
 
 	woocommerce_product_loop_start();
 
@@ -106,11 +138,6 @@ if (woocommerce_product_loop()) {
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
 do_action('woocommerce_after_main_content');
-
-
-
-
-
 
 /**
  * Hook: woocommerce_sidebar.
