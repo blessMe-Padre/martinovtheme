@@ -2676,3 +2676,12 @@ a {
     max-height: 200px;
   }
 }
+
+.woocommerce-loop-category__title .count {
+  display: none;
+}
+
+.product-columns-list {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+}

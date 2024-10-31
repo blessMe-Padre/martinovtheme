@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
 ?>
 <li <?php wc_product_cat_class('', $category); ?>>
 
-	22222222222222222222222222
+	33333
 	<?php
 	/**
 	 * The woocommerce_before_subcategory hook.
