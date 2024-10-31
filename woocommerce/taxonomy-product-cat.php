@@ -19,10 +19,6 @@ if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
-// if () {
-// wc_get_template('archive-product.php');
-// }
-
 
 get_header('shop');
 
@@ -90,12 +86,54 @@ if (woocommerce_product_loop()) {
 	wp_nav_menu([
 		'theme_location' => 'brands',
 		'container' => 'ul',
-		'menu_class' => '',
+		'menu_class' => 'brands-list',
 		'menu_id' => ''
 	]);
 	echo '<div class="woo-page-wrapper">';
-	echo '<div class="1111">11111111111111</div>';
-	echo '<div class="2222">';
+
+	echo '<div class="left">';
+	$attributes = get_attributes(array(
+		'attributes_include' => array('brend', 'obvem'),
+		'attributes_orderby' => 'include'
+	));
+	echo '<div class="filter_panel">';
+	?>
+	<ul class="filters">
+		<?php foreach ($attributes as $atribute) { ?>
+			<li class="filter">
+				<div class="filter__title"><?php echo $atribute['attribute_label']; ?></div>
+				<ul class="filter__content">
+					<?php
+					foreach ($atribute['attribute_terms'] as $term) {
+						if (isset($_GET[$atribute['attribute_name']])) {
+							$data = json_decode(stripslashes($_GET[$atribute['attribute_name']]), true);
+							if (!is_array($data)) {
+								$data = array($_GET[$atribute['attribute_name']]);
+							}
+						}
+						?>
+						<li>
+							<input type="checkbox" name="<?php echo $atribute['attribute_name']; ?>"
+								value="<?php echo $term->term_id; ?>" <?php echo (isset($data) && in_array($term->term_id, $data)) ? ' checked' : ''; ?> /><?php echo $term->name; ?>
+						</li>
+						<?php
+					}
+					?>
+				</ul>
+			</li>
+		<?php } ?>
+	</ul>
+	<?php
+
+	echo '<!-- Тут рисуешь фильтры -->';
+	echo '<div class="filter_buttons">';
+	echo '<div id="filter_submit" class="button">Применить</div>';
+	echo '<div id="filter_reset" class="button">Сбросить</div>';
+	echo '</div>';
+	echo '</div>';
+	echo '</div>';
+
+	echo '<div class="right">';
 	do_action('woocommerce_before_shop_loop');
 
 	woocommerce_product_loop_start();

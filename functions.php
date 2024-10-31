@@ -24,6 +24,7 @@ function theme_add_scripts()
     wp_enqueue_script('smoothscroll', get_template_directory_uri() .
         '/vendor/smoothscroll.js', false, null, 'footer');
 
+    wp_enqueue_script('get', get_theme_file_uri('/get.js'));
     wp_enqueue_script_module('main', get_theme_file_uri('/main.js'));
 }
 
@@ -36,4 +37,8 @@ function add_menu()
 
 if (class_exists('WooCommerce')) {
     require_once(get_template_directory() . '/woocommerse.php');
+}
+
+if (class_exists('WooCommerce')) {
+    require_once(get_template_directory() . '/woocommerse-functions/filters.php');
 }

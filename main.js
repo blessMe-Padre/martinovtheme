@@ -222,7 +222,7 @@ const initCurrentYear = () => {
   }
 };
 const initScrollAnimation = () => {
-  var ScrollOut = /* @__PURE__ */ function() {
+  var ScrollOut = /* @__PURE__ */ function () {
     function S(e2, t2, n2) {
       return e2 < t2 ? t2 : n2 < e2 ? n2 : e2;
     }
@@ -244,7 +244,7 @@ const initScrollAnimation = () => {
     }
     var z = [];
     function e() {
-      q = 0, z.slice().forEach(function(e2) {
+      q = 0, z.slice().forEach(function (e2) {
         return e2();
       }), F();
     }
@@ -256,13 +256,13 @@ const initScrollAnimation = () => {
     }
     function m() {
     }
-    return function(L) {
-      var i, P, _, H, o = (L = L || {}).onChange || m, l = L.onHidden || m, c = L.onShown || m, s = L.onScroll || m, f = L.cssProps ? (i = L.cssProps, function(e3, t3) {
+    return function (L) {
+      var i, P, _, H, o = (L = L || {}).onChange || m, l = L.onHidden || m, c = L.onShown || m, s = L.onScroll || m, f = L.cssProps ? (i = L.cssProps, function (e3, t3) {
         for (var n3 in t3) n3.indexOf("_") && (true === i || i[n3]) && e3.style.setProperty("--" + d(n3), (r2 = t3[n3], Math.round(1e4 * r2) / 1e4));
         var r2;
       }) : m, e2 = L.scrollingElement, A = e2 ? v(e2)[0] : window, W = e2 ? v(e2)[0] : document.documentElement, x = false, O = {}, y = [];
       function t2() {
-        y = v(L.targets || "[data-scroll]", v(L.scope || W)[0]).map(function(e3) {
+        y = v(L.targets || "[data-scroll]", v(L.scope || W)[0]).map(function (e3) {
           return { element: e3 };
         });
       }
@@ -270,14 +270,14 @@ const initScrollAnimation = () => {
         var e3 = W.clientWidth, t3 = W.clientHeight, n3 = T(-P + (P = W.scrollLeft || window.pageXOffset)), r2 = T(-_ + (_ = W.scrollTop || window.pageYOffset)), i2 = W.scrollLeft / (W.scrollWidth - e3 || 1), o2 = W.scrollTop / (W.scrollHeight - t3 || 1);
         x = x || O.scrollDirX !== n3 || O.scrollDirY !== r2 || O.scrollPercentX !== i2 || O.scrollPercentY !== o2, O.scrollDirX = n3, O.scrollDirY = r2, O.scrollPercentX = i2, O.scrollPercentY = o2;
         for (var l2, c2 = false, s2 = 0; s2 < y.length; s2++) {
-          for (var f2 = y[s2], u2 = f2.element, a2 = u2, d2 = 0, v2 = 0; d2 += a2.offsetLeft, v2 += a2.offsetTop, (a2 = a2.offsetParent) && a2 !== A; ) ;
+          for (var f2 = y[s2], u2 = f2.element, a2 = u2, d2 = 0, v2 = 0; d2 += a2.offsetLeft, v2 += a2.offsetTop, (a2 = a2.offsetParent) && a2 !== A;);
           var h2 = u2.clientHeight || u2.offsetHeight || 0, m2 = u2.clientWidth || u2.offsetWidth || 0, g = (S(d2 + m2, P, P + e3) - S(d2, P, P + e3)) / m2, p = (S(v2 + h2, _, _ + t3) - S(v2, _, _ + t3)) / h2, w = 1 === g ? 0 : T(d2 - P), X = 1 === p ? 0 : T(v2 - _), Y = S((P - (m2 / 2 + d2 - e3 / 2)) / (e3 / 2), -1, 1), b = S((_ - (h2 / 2 + v2 - t3 / 2)) / (t3 / 2), -1, 1), D = void 0;
           D = L.offset ? N(L.offset, u2, f2, W) > _ ? 0 : 1 : (N(L.threshold, u2, f2, W) || 0) < g * p ? 1 : 0;
           var E = f2.visible !== D;
           (f2._changed || E || f2.visibleX !== g || f2.visibleY !== p || f2.index !== s2 || f2.elementHeight !== h2 || f2.elementWidth !== m2 || f2.offsetX !== d2 || f2.offsetY !== v2 || f2.intersectX != f2.intersectX || f2.intersectY != f2.intersectY || f2.viewportX !== Y || f2.viewportY !== b) && (c2 = true, f2._changed = true, f2._visibleChanged = E, f2.visible = D, f2.elementHeight = h2, f2.elementWidth = m2, f2.index = s2, f2.offsetX = d2, f2.offsetY = v2, f2.visibleX = g, f2.visibleY = p, f2.intersectX = w, f2.intersectY = X, f2.viewportX = Y, f2.viewportY = b, f2.visible = D);
         }
-        H || !x && !c2 || (l2 = C, z.push(l2), F(), H = function() {
-          !(z = z.filter(function(e4) {
+        H || !x && !c2 || (l2 = C, z.push(l2), F(), H = function () {
+          !(z = z.filter(function (e4) {
             return e4 !== l2;
           })).length && q && (cancelAnimationFrame(q), q = 0);
         });
@@ -293,14 +293,16 @@ const initScrollAnimation = () => {
         H && (H(), H = void 0);
       }
       t2(), n2(), C();
-      var r = 0, a = function() {
-        r = r || setTimeout(function() {
+      var r = 0, a = function () {
+        r = r || setTimeout(function () {
           r = 0, n2();
         }, 0);
       };
-      return window.addEventListener("resize", a), A.addEventListener("scroll", a), { index: t2, update: n2, teardown: function() {
-        u(), window.removeEventListener("resize", a), A.removeEventListener("scroll", a);
-      } };
+      return window.addEventListener("resize", a), A.addEventListener("scroll", a), {
+        index: t2, update: n2, teardown: function () {
+          u(), window.removeEventListener("resize", a), A.removeEventListener("scroll", a);
+        }
+      };
     };
   }();
   ScrollOut();
@@ -313,4 +315,78 @@ window.addEventListener("DOMContentLoaded", () => {
   initButtonAnimation();
   initCurrentYear();
   initScrollAnimation();
+
+  jQuery('body').on('click', '#filter_submit', function (e) {
+    const this_submit = jQuery(e.currentTarget);
+    const this_filters = this_submit.parents('.filter_panel').eq(0);
+    const this_inputs = this_filters.find('input');
+    let filters = {};
+
+    this_inputs.each(function (i, item) {
+      const this_input = jQuery(item);
+
+      if (filters[this_input.attr('name')] === undefined) {
+        filters[this_input.attr('name')] = null;
+      }
+
+      switch (this_input.attr('type')) {
+        case 'checkbox':
+          if (this_input.is(':checked')) {
+            if (filters[this_input.attr('name')] === null) {
+              filters[this_input.attr('name')] = this_input.val();
+            }
+            else if (typeof filters[this_input.attr('name')] !== 'object') {
+              filters[this_input.attr('name')] = [filters[this_input.attr('name')]];
+              filters[this_input.attr('name')].push(this_input.val());
+            }
+            else {
+              filters[this_input.attr('name')].push(this_input.val());
+            }
+          }
+          break;
+        default:
+          if (this_input.val() !== '') {
+            filters[this_input.attr('name')] = this_input.val();
+          }
+          else {
+            filters[this_input.attr('name')] = null;
+          }
+          break;
+      }
+    });
+
+    Object.keys(filters).forEach(function (item, i) {
+      if (filters[item] !== null) {
+        get(item, filters[item]);
+      }
+      else {
+        get(item, null);
+      }
+    });
+
+    window.location.reload();
+  });
+
+  jQuery('body').on('click', '#filter_reset', function (e) {
+    const this_reset = jQuery(e.currentTarget);
+    const this_filters = this_reset.parents('.filter_panel').eq(0);
+    const this_inputs = this_filters.find('input');
+
+    this_inputs.each(function (i, item) {
+      const this_input = jQuery(item);
+
+      switch (this_input.attr('type')) {
+        case 'checkbox':
+          jQuery(item).prop('checked', false);
+          break;
+        default:
+          jQuery(item).val('');
+          break;
+      }
+
+      get(this_input.attr('name'), null);
+    });
+
+    window.location.reload();
+  });
 });
