@@ -307,6 +307,24 @@ const initScrollAnimation = () => {
   }();
   ScrollOut();
 };
+
+const mobileFilterBtn = document.querySelector('.product-filter-btn');
+if (mobileFilterBtn) {
+  const filterHeader = document.querySelector('.filter_panel-wrapper');
+  const filterBody = document.querySelector('.woo-page-wrapper .left');
+
+  mobileFilterBtn.addEventListener('click', () => {
+    filterHeader.classList.add('is-active');
+    filterBody.classList.add('is-active');
+  });
+
+  const filterClose = document.querySelector('.filter_panel-button');
+  filterClose.addEventListener('click', () => {
+    filterHeader.classList.remove('is-active');
+    filterBody.classList.remove('is-active');
+  });
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   console.log("подключен скрипт main.js");
   initNav();
