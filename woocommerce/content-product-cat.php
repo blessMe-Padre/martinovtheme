@@ -20,8 +20,10 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <li <?php wc_product_cat_class('', $category); ?>>
-
-	33333
+	<?php
+	$count = $category->count;
+	?>
+	<p class="item-category-count"><?php echo $count; ?> товаров</p>
 	<?php
 	/**
 	 * The woocommerce_before_subcategory hook.
@@ -54,6 +56,5 @@ if (!defined('ABSPATH')) {
 	 *
 	 * @hooked woocommerce_template_loop_category_link_close - 10
 	 */
-	do_action('woocommerce_after_subcategory', $category);
 	?>
 </li>
